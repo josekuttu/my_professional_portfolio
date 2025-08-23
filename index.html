@@ -6,6 +6,7 @@
     <title>Your Professional Portfolio</title>
     <!-- Tailwind CSS for a modern, responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,10 +90,13 @@
             <nav>
                 <ul class="flex space-x-4 sm:space-x-6 text-sm sm:text-base">
                     <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
+                    <li><a href="resume/python_full_stack_resume.pdf" class="hover:text-indigo-400 transition-colors">Resume</a></li>
                     <li><a href="#education" class="hover:text-indigo-400 transition-colors">Education</a></li>
                     <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
                     <li><a href="#certifications" class="hover:text-indigo-400 transition-colors">Certificates</a></li>
                     <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+
+
                 </ul>
             </nav>
         </div>
@@ -111,7 +115,7 @@
                 <h2 class="text-5xl font-extrabold text-white mb-4 leading-tight">Hello! I'm <span class="hero-gradient">Jose</span>.</h2>
                 <p class="text-lg leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0 text-gray-400">
                     <!-- IMPORTANT: Replace this placeholder text with your actual professional summary -->
-                    I am a passionate and results-driven software developer with expertise in front-end technologies. I specialize in building intuitive, high-performance web applications and am always eager to learn new skills and solve complex problems.
+                    I’m a Python Full Stack Developer passionate about building scalable, user-friendly web applications. I enjoy working across the stack—from crafting clean frontends to designing robust backends. Alongside web development, I’m exploring TensorFlow and OpenCV to dive into the world of machine learning and computer vision. Always curious, always learning, and always ready to solve problems with code.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-400 mb-8">
                     <p><strong>Place:</strong> Your City, Country</p>
@@ -130,7 +134,18 @@
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-tailwind-css text-cyan-500"></i><span>Tailwind CSS</span></span>
                 </div>
             </div>
+
         </section>
+        <a href="path/to/your/resume.pdf" download>
+        <button
+            class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
+        >
+            <!-- All the inner span elements go here -->
+            <span
+                class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
+                >Download Resume</span
+            >
+        </button>
 
         <!-- Education Section -->
         <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
