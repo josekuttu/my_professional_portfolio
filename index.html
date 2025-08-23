@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Professional Portfolio</title>
+    <!-- Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for social media and skills icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate On Scroll (AOS) library for scroll animations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #e5e7eb;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 5rem;
+            height: 4px;
+            background: #6366f1; /* Solid color for the underline */
+            border-radius: 9999px;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+            width: 300px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+        }
+
+        /* Hide scrollbar for a cleaner look */
+        .hide-scroll-bar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hide-scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hero Section Gradient */
+        .hero-gradient {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Subtle Background Texture */
+        .bg-texture {
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            background-size: cover;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 relative">
+    <!-- Subtle Background Texture -->
+    <div class="absolute inset-0 bg-texture z-0"></div>
+
+    <!-- Header Section -->
+    <header class="bg-zinc-950 p-6 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-indigo-400">Your Name</h1>
+            <nav>
+                <ul class="flex space-x-4 sm:space-x-6 text-sm sm:text-base">
+                    <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
+                    <li><a href="#education" class="hover:text-indigo-400 transition-colors">Education</a></li>
+                    <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
+                    <li><a href="#certifications" class="hover:text-indigo-400 transition-colors">Certificates</a></li>
+                    <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-8 relative z-10">
+
+        <!-- Hero/About Me Section -->
+        <section id="about" class="py-16 flex flex-col md:flex-row items-center md:items-start gap-8" data-aos="fade-up" data-aos-duration="1000">
+            <!-- Profile Image -->
+            <div class="flex-shrink-0">
+                <img src="https://placehold.co/150x150/6366f1/FFFFFF?text=PROFILE" alt="Your Profile Picture" class="w-40 h-40 rounded-full object-cover shadow-2xl border-4 border-indigo-500">
+            </div>
+
+            <div class="text-center md:text-left">
+                <h2 class="text-5xl font-extrabold text-white mb-4 leading-tight">Hello! I'm <span class="hero-gradient">Your Name</span>.</h2>
+                <p class="text-lg leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0 text-gray-400">
+                    <!-- IMPORTANT: Replace this placeholder text with your actual professional summary -->
+                    I am a passionate and results-driven software developer with expertise in front-end technologies. I specialize in building intuitive, high-performance web applications and am always eager to learn new skills and solve complex problems.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-400 mb-8">
+                    <p><strong>Place:</strong> Your City, Country</p>
+                    <p><strong>Date of Birth:</strong> DD/MM/YYYY</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Email:</strong> your.email@example.com</p>
+                </div>
+                <h3 class="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-js-square text-yellow-400"></i><span>JavaScript</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-react text-cyan-400"></i><span>React</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-git-alt text-orange-600"></i><span>Git</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-tailwind-css text-cyan-500"></i><span>Tailwind CSS</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="text-4xl font-bold section-title mb-8 text-white">Education</h2>
+            <div class="flex flex-col gap-8">
+                <!-- Education Entry 1 -->
+                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl" data-aos="fade-right" data-aos-duration="1000">
+                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Degree Name</h3>
+                    <p class="text-gray-400 mb-2 font-medium">University / Institution Name</p>
+                    <p class="text-gray-400 mb-4 text-sm">Graduation Year: YYYY</p>
+                    <p class="text-gray-400">A brief description of your education. You can list relevant coursework, specializations, or honors here.</p>
+                    <ul class="list-disc list-inside mt-4 text-gray-500 text-sm">
+                        <li>Relevant Coursework: Course 1, Course 2, Course 3</li>
+                        <li>GPA: 3.8/4.0</li>
+                        <li>Honors: Magna Cum Laude</li>
+                    </ul>
+                </div>
+                <!-- Education Entry 2 (for demonstration) -->
+                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Another Degree or Certification</h3>
+                    <p class="text-gray-400 mb-2 font-medium">University / Institution Name</p>
+                    <p class="text-gray-400 mb-4 text-sm">Graduation Year: YYYY</p>
+                    <p class="text-gray-400">Description of another academic achievement or certification.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Carousel) -->
+        <section id="projects" class="py-16 relative px-10" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="text-4xl font-bold section-title mb-8 text-white">Projects</h2>
+            <!-- Navigation Buttons -->
+            <div class="absolute left-0 right-0 top-1/2 flex justify-between transform -translate-y-1/2">
+                <button id="projects-left-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="projects-right-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <!-- Projects Container -->
+            <div id="projects-container" class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+                <div class="flex flex-nowrap gap-8">
+                    <!-- IMPORTANT: Replace these with your actual projects -->
+                    <!-- Project Card 1 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Project+1" alt="Project 1 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Project Title One</h3>
+                        <p class="text-gray-400 mb-2 font-medium">Tools Used: HTML, CSS, JavaScript</p>
+                        <p class="text-gray-400 mb-4">A brief description of your project. Explain its purpose, your role, and the technologies you utilized.</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Project+2" alt="Project 2 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Project Title Two</h3>
+                        <p class="text-gray-400 mb-2 font-medium">Tools Used: React, Node.js</p>
+                        <p class="text-gray-400 mb-4">A brief description of your project. Explain its purpose, your role, and the technologies you utilized.</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Project+3" alt="Project 3 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Project Title Three</h3>
+                        <p class="text-gray-400 mb-2 font-medium">Tools Used: Python, Django</p>
+                        <p class="text-gray-400 mb-4">A brief description of your project. Explain its purpose, your role, and the technologies you utilized.</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 4 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Project+4" alt="Project 4 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Project Title Four</h3>
+                        <p class="text-gray-400 mb-2 font-medium">Tools Used: Vue.js, Firebase</p>
+                        <p class="text-gray-400 mb-4">A brief description of your project. Explain its purpose, your role, and the technologies you utilized.</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 5 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Project+5" alt="Project 5 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Project Title Five</h3>
+                        <p class="text-gray-400 mb-2 font-medium">Tools Used: Next.js, GraphQL</p>
+                        <p class="text-gray-400 mb-4">A brief description of your project. Explain its purpose, your role, and the technologies you utilized.</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium">View Project &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section (Carousel) -->
+        <section id="certifications" class="py-16 relative px-10" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="text-4xl font-bold section-title mb-8 text-white">Certificates</h2>
+            <!-- Navigation Buttons -->
+            <div class="absolute left-0 right-0 top-1/2 flex justify-between transform -translate-y-1/2">
+                <button id="certs-left-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="certs-right-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <!-- Certificates Container -->
+            <div id="certs-container" class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+                <div class="flex flex-nowrap gap-8">
+                    <!-- IMPORTANT: Replace these with your actual certificates -->
+                    <!-- Certificate Card 1 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+1" alt="Certificate 1 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">JavaScript Algorithms and Data Structures</h3>
+                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
+                        <p class="text-gray-400 text-sm mb-4">Acquired Date: March 2023</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
+                    </div>
+                    <!-- Certificate Card 2 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+2" alt="Certificate 2 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Responsive Web Design</h3>
+                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
+                        <p class="text-gray-400 text-sm mb-4">Acquired Date: January 2023</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
+                    </div>
+                    <!-- Certificate Card 3 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+3" alt="Certificate 3 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Front-End Development Libraries</h3>
+                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
+                        <p class="text-gray-400 text-sm mb-4">Acquired Date: May 2023</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
+                    </div>
+                    <!-- Certificate Card 4 -->
+                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+4" alt="Certificate 4 Image" class="w-full h-auto rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Data Visualization</h3>
+                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
+                        <p class="text-gray-400 text-sm mb-4">Acquired Date: July 2023</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="text-4xl font-bold section-title mb-8 text-white">Contact Me</h2>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                <!-- Phone -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-phone text-indigo-400 text-2xl"></i>
+                    <p class="text-lg font-medium text-gray-200">+1 (555) 123-4567</p>
+                </div>
+                <!-- Email -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-envelope text-indigo-400 text-2xl"></i>
+                    <p class="text-lg font-medium text-gray-200">your.email@example.com</p>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-zinc-950 p-6 text-center text-gray-500">
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <!-- AOS JavaScript file -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+    <!-- JavaScript for scroll functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to the project section elements
+            const projectsContainer = document.getElementById('projects-container');
+            const projectsLeftBtn = document.getElementById('projects-left-btn');
+            const projectsRightBtn = document.getElementById('projects-right-btn');
+
+            // Get references to the certifications section elements
+            const certsContainer = document.getElementById('certs-container');
+            const certsLeftBtn = document.getElementById('certs-left-btn');
+            const certsRightBtn = document.getElementById('certs-right-btn');
+
+            // Add event listeners for the Projects section
+            projectsLeftBtn.addEventListener('click', () => {
+                projectsContainer.scrollBy({ left: -350, behavior: 'smooth' });
+            });
+
+            projectsRightBtn.addEventListener('click', () => {
+                projectsContainer.scrollBy({ left: 350, behavior: 'smooth' });
+            });
+
+            // Add event listeners for the Certifications section
+            certsLeftBtn.addEventListener('click', () => {
+                certsContainer.scrollBy({ left: -350, behavior: 'smooth' });
+            });
+
+            certsRightBtn.addEventListener('click', () => {
+                certsContainer.scrollBy({ left: 350, behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>
