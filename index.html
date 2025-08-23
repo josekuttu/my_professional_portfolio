@@ -108,7 +108,7 @@
         <section id="about" class="py-16 flex flex-col md:flex-row items-center md:items-start gap-8" data-aos="fade-up" data-aos-duration="1000">
             <!-- Profile Image -->
             <div class="flex-shrink-0">
-                <img src="https://placehold.co/150x150/6366f1/FFFFFF?text=PROFILE" alt="Your Profile Picture" class="w-40 h-40 rounded-full object-cover shadow-2xl border-4 border-indigo-500">
+                <img src="profile_photos/profile.jpg" alt="Your Profile Picture" class="w-40 h-40 rounded-full object-cover shadow-2xl border-4 border-indigo-500">
             </div>
 
             <div class="text-center md:text-left">
@@ -136,16 +136,36 @@
             </div>
 
         </section>
-        <a href="path/to/your/resume.pdf" download>
-        <button
-            class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
-        >
-            <!-- All the inner span elements go here -->
-            <span
-                class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
-                >Download Resume</span
-            >
-        </button>
+        <div class="flex justify-center">
+  <!-- The button code goes here -->
+  <a href="resume/python_full_stack_resume.pdf" download>
+    <button
+      class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
+    >
+      <span
+        class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4"
+      >
+        <span
+          class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
+        ></span>
+      </span>
+      <span
+        class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4"
+      >
+        <span
+          class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
+        ></span>
+      </span>
+      <span
+        class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"
+      ></span>
+      <span
+        class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
+        >Download Resume</span
+      >
+    </button>
+  </a>
+</div>
 
         <!-- Education Section -->
         <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
