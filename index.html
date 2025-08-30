@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Professional Portfolio</title>
+    <title>Jose's Professional Portfolio</title>
     <!-- Tailwind CSS for a modern, responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -24,13 +24,11 @@
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll due to animations */
         }
-
         .section-title {
             position: relative;
             padding-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -41,45 +39,36 @@
             background: #6366f1; /* Solid color for the underline */
             border-radius: 9999px;
         }
-
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             flex-shrink: 0;
             width: 300px;
         }
-
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
         }
-
         /* Hide scrollbar for a cleaner look */
         .hide-scroll-bar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
         .hide-scroll-bar::-webkit-scrollbar {
             display: none;
         }
-
         /* Hero Section Gradient */
         .hero-gradient {
-            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+            background-image: linear-gradient(to right, #4c51bf, #667eea, #a0aec0);
             -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-text-fill-color: transparent;
         }
-
         /* Subtle Background Texture */
         .bg-texture {
-            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            background-size: cover;
-            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e9e9e' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 10l2-2v4l-2 2v-4zm20 0l-2-2v4l2 2v-4zM2 0h16v2H2V0zm0 18h16v2H2v-2zM18 2L2 18h2L20 4v-2zM0 0l18 18h2V0H0z'/%3E%3C/g%3E%3C/svg%3E");
         }
     </style>
 </head>
-<body class="bg-black text-gray-200 relative">
+<body class="bg-black text-gray-200 relative font-sans">
     <!-- Subtle Background Texture -->
     <div class="absolute inset-0 bg-texture z-0"></div>
 
@@ -95,77 +84,81 @@
                     <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
                     <li><a href="#certifications" class="hover:text-indigo-400 transition-colors">Certificates</a></li>
                     <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
-
-
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="container mx-auto p-8 relative z-10">
-
         <!-- Hero/About Me Section -->
         <section id="about" class="py-16 flex flex-col md:flex-row items-center md:items-start gap-8" data-aos="fade-up" data-aos-duration="1000">
-            <!-- Profile Image -->
-            <div class="flex-shrink-0">
-                <img src="profile_photos/profile.jpg" alt="Your Profile Picture" class="w-40 h-40 rounded-full object-cover shadow-2xl border-4 border-indigo-500">
+
+            <!-- Profile Image and Name/Title -->
+            <div class="flex flex-col items-center">
+                <!-- Added cursor-pointer and an ID to the image for interactivity -->
+                <img
+                    id="profileImage"
+                    class="w-48 h-48 rounded-full object-cover mb-4 shadow-lg cursor-pointer transition-transform duration-300 transform hover:scale-105"
+                    src="profile_photos/profile.jpg"
+                    alt="Your profile picture"
+                >
             </div>
 
+            <!-- About Me Content -->
             <div class="text-center md:text-left">
                 <h2 class="text-5xl font-extrabold text-white mb-4 leading-tight">Hello! I'm <span class="hero-gradient">Jose</span>.</h2>
                 <p class="text-lg leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0 text-gray-400">
-                    <!-- IMPORTANT: Replace this placeholder text with your actual professional summary -->
                     I’m a Python Full Stack Developer passionate about building scalable, user-friendly web applications. I enjoy working across the stack—from crafting clean frontends to designing robust backends. Alongside web development, I’m exploring TensorFlow and OpenCV to dive into the world of machine learning and computer vision. Always curious, always learning, and always ready to solve problems with code.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-400 mb-8">
-                    <p><strong>Place:</strong> Your City, Country</p>
-                    <p><strong>Date of Birth:</strong> DD/MM/YYYY</p>
-                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-                    <p><strong>Email:</strong> your.email@example.com</p>
+                    <p><strong>Place:</strong> Idukki, Kerala</p>
+                    <p><strong>Date of Birth:</strong> 04/02/2003</p>
+                    <p><strong>Phone:</strong> +91 9061881899</p>
+                    <p><strong>Email:</strong> josemcontactmail@gmail.com</p>
                 </div>
                 <h3 class="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-js-square text-yellow-400"></i><span>JavaScript</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>Django</span></span>
+
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-react text-cyan-400"></i><span>React</span></span>
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-git-alt text-orange-600"></i><span>Git</span></span>
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-tailwind-css text-cyan-500"></i><span>Tailwind CSS</span></span>
                 </div>
             </div>
-
         </section>
-        <div class="flex justify-center">
-  <!-- The button code goes here -->
-  <a href="resume/python_full_stack_resume.pdf" download>
-    <button
-      class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
-    >
-      <span
-        class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4"
-      >
-        <span
-          class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
-        ></span>
-      </span>
-      <span
-        class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4"
-      >
-        <span
-          class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
-        ></span>
-      </span>
-      <span
-        class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"
-      ></span>
-      <span
-        class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
-        >Download Resume</span
-      >
-    </button>
-  </a>
-</div>
+
+        <!-- Download Resume Button -->
+        <div class="flex justify-center mb-16">
+            <a href="resume/python_full_stack_resume.pdf" download>
+                <button
+                class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
+                >
+                <span
+                    class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4"
+                >
+                    <span
+                    class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
+                    ></span>
+                </span>
+                <span
+                    class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4"
+                >
+                    <span
+                    class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
+                    ></span>
+                </span>
+                <span
+                    class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"
+                ></span>
+                <span
+                    class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
+                    >Download Resume</span
+                >
+                </button>
+            </a>
+        </div>
 
         <!-- Education Section -->
         <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
@@ -333,42 +326,80 @@
         <p>&copy; 2024 Your Name. All rights reserved.</p>
     </footer>
 
+    <!-- Image Modal (hidden by default) -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 cursor-pointer">
+        <!-- Close button at the top right -->
+        <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-400 transition-colors">
+            &times;
+        </button>
+        <!-- The image inside the modal -->
+        <img id="modalImage" class="max-w-full max-h-full rounded-lg shadow-2xl" src="" alt="Enlarged profile picture">
+    </div>
+
     <!-- AOS JavaScript file -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <!-- Initialize AOS -->
-    <script>
-        AOS.init();
-    </script>
-    <!-- JavaScript for scroll functionality -->
+
+    <!-- All page-specific JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Get references to the project section elements
+            // Initialize AOS
+            AOS.init();
+
+            // Image Modal Logic
+            const profileImage = document.getElementById('profileImage');
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+
+            if (profileImage) {
+                profileImage.addEventListener('click', () => {
+                    const imageUrl = profileImage.getAttribute('src');
+                    modalImage.src = imageUrl;
+                    imageModal.classList.remove('hidden');
+                    imageModal.classList.add('flex');
+                });
+            }
+
+            if (imageModal) {
+                imageModal.addEventListener('click', (e) => {
+                    if (e.target === imageModal || e.target === closeModal) {
+                        imageModal.classList.add('hidden');
+                        imageModal.classList.remove('flex');
+                    }
+                });
+            }
+
+            // Carousel/Scroll Functionality
             const projectsContainer = document.getElementById('projects-container');
             const projectsLeftBtn = document.getElementById('projects-left-btn');
             const projectsRightBtn = document.getElementById('projects-right-btn');
-
-            // Get references to the certifications section elements
             const certsContainer = document.getElementById('certs-container');
             const certsLeftBtn = document.getElementById('certs-left-btn');
             const certsRightBtn = document.getElementById('certs-right-btn');
 
-            // Add event listeners for the Projects section
-            projectsLeftBtn.addEventListener('click', () => {
-                projectsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-            });
+            if (projectsLeftBtn && projectsContainer) {
+                projectsLeftBtn.addEventListener('click', () => {
+                    projectsContainer.scrollBy({ left: -350, behavior: 'smooth' });
+                });
+            }
 
-            projectsRightBtn.addEventListener('click', () => {
-                projectsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-            });
+            if (projectsRightBtn && projectsContainer) {
+                projectsRightBtn.addEventListener('click', () => {
+                    projectsContainer.scrollBy({ left: 350, behavior: 'smooth' });
+                });
+            }
 
-            // Add event listeners for the Certifications section
-            certsLeftBtn.addEventListener('click', () => {
-                certsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-            });
+            if (certsLeftBtn && certsContainer) {
+                certsLeftBtn.addEventListener('click', () => {
+                    certsContainer.scrollBy({ left: -350, behavior: 'smooth' });
+                });
+            }
 
-            certsRightBtn.addEventListener('click', () => {
-                certsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-            });
+            if (certsRightBtn && certsContainer) {
+                certsRightBtn.addEventListener('click', () => {
+                    certsContainer.scrollBy({ left: 350, behavior: 'smooth' });
+                });
+            }
         });
     </script>
 
