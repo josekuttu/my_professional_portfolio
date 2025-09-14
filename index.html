@@ -66,6 +66,49 @@
         .bg-texture {
             background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e9e9e' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 10l2-2v4l-2 2v-4zm20 0l-2-2v4l2 2v-4zM2 0h16v2H2V0zm0 18h16v2H2v-2zM18 2L2 18h2L20 4v-2zM0 0l18 18h2V0H0z'/%3E%3C/g%3E%3C/svg%3E");
         }
+         .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 5rem;
+            height: 4px;
+            background: #6366f1;
+            border-radius: 9999px;
+        }
+        .timeline-container {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0.5rem;
+            width: 2px;
+            height: 100%;
+            background-color: #4f46e5;
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            transform: translateX(-50%);
+            width: 1rem;
+            height: 1rem;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            border: 2px solid #1a202c;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 relative font-sans">
@@ -119,12 +162,12 @@
                 <h3 class="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>Django</span></span>
-
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-react text-cyan-400"></i><span>React</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-git-alt text-orange-600"></i><span>Git</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-tailwind-css text-cyan-500"></i><span>Tailwind CSS</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-dyalog text-emerald-400"></i><span>Django</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-java text-orange-400"></i><span>Java</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fas fa-camera text-sky-400"></i><span>OpenCV</span></span>
+                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fas fa-brain text-rose-400"></i><span>TensorFlow</span></span>
                 </div>
             </div>
         </section>
@@ -161,30 +204,39 @@
         </div>
 
         <!-- Education Section -->
-        <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
-            <h2 class="text-4xl font-bold section-title mb-8 text-white">Education</h2>
-            <div class="flex flex-col gap-8">
-                <!-- Education Entry 1 -->
-                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl" data-aos="fade-right" data-aos-duration="1000">
-                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Degree Name</h3>
-                    <p class="text-gray-400 mb-2 font-medium">University / Institution Name</p>
-                    <p class="text-gray-400 mb-4 text-sm">Graduation Year: YYYY</p>
-                    <p class="text-gray-400">A brief description of your education. You can list relevant coursework, specializations, or honors here.</p>
-                    <ul class="list-disc list-inside mt-4 text-gray-500 text-sm">
-                        <li>Relevant Coursework: Course 1, Course 2, Course 3</li>
-                        <li>GPA: 3.8/4.0</li>
-                        <li>Honors: Magna Cum Laude</li>
+
+
+    <!-- Education Section with Timeline -->
+    <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="text-4xl font-bold section-title mb-8 text-white">Education</h2>
+
+        <div class="timeline-container">
+            <!-- Education Entry 1 -->
+            <div class="timeline-item mb-12" data-aos="fade-right" data-aos-duration="1000">
+                <span class="timeline-dot"></span>
+                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl relative ml-6">
+                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Master of Computer Application</h3>
+                    <p class="text-gray-400 mb-2 font-medium">Marian College, Kuttikanam (Autonomous)</p>
+                    <p class="text-gray-400 mb-4 text-sm">2024 - Present</p>
+
+                        <li>CGPA: --</li>
+
                     </ul>
                 </div>
-                <!-- Education Entry 2 (for demonstration) -->
-                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
-                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Another Degree or Certification</h3>
-                    <p class="text-gray-400 mb-2 font-medium">University / Institution Name</p>
-                    <p class="text-gray-400 mb-4 text-sm">Graduation Year: YYYY</p>
-                    <p class="text-gray-400">Description of another academic achievement or certification.</p>
+            </div>
+
+            <!-- Education Entry 2 -->
+            <div class="timeline-item mb-12" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+                <span class="timeline-dot"></span>
+                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl relative ml-6">
+                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Bachelor of Computer Applications</h3>
+                    <p class="text-gray-400 mb-2 font-medium">St. Antony's College, Peruvanthanam</p>
+                    <p class="text-gray-400 mb-4 text-sm">2021 - 2024</p>
+                    <li>CGPA : 6.66</li>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
         <!-- Projects Section (Carousel) -->
         <section id="projects" class="py-16 relative px-10" data-aos="fade-up" data-aos-duration="1000">
