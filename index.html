@@ -1,888 +1,1063 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jose's Professional Portfolio</title>
-    <!-- Tailwind CSS for a modern, responsive design -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jose M — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --bg:        #0d0d0f;
+    --bg-2:      #13131a;
+    --bg-3:      #1a1a26;
+    --border:    rgba(255,255,255,0.07);
+    --accent:    #7c5cfc;
+    --accent-2:  #a78bfa;
+    --accent-glow: rgba(124,92,252,0.25);
+    --text:      #e8e8f0;
+    --text-muted:#8b8ba8;
+    --text-dim:  #555570;
+    --white:     #ffffff;
+    --radius:    12px;
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
 
-    <!-- Inter font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for social media and skills icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Animate On Scroll (AOS) library for scroll animations -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <style>
-    body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #e5e7eb;
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
-        }
-        .section-title {
-            position: relative;
-            padding-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 5rem;
-            height: 4px;
-            background: #6366f1; /* Solid color for the underline */
-            border-radius: 9999px;
-        }
-        /* Projects and Certifications Card Styling */
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            flex-shrink: 0;
-            width: 320px; /* Slightly wider cards for better visual weight */
-            border: 1px solid transparent; /* Base for hover effect */
-        }
-        .card:hover {
-            transform: translateY(-8px); /* Deeper lift on hover */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-            border-color: #4f46e5; /* Subtle border highlight */
-        }
-        /* Hide scrollbar for a cleaner look */
-        .hide-scroll-bar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .hide-scroll-bar::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hero Section Gradient */
-        .hero-gradient {
-            background-image: linear-gradient(to right, #4c51bf, #667eea, #a0aec0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ul { list-style: none; }
 
-        /* Timeline Styling for Education */
-        .timeline-container {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0.5rem;
-            width: 2px;
-            height: 100%;
-            background-color: #4f46e5;
-        }
-        .timeline-item {
-            position: relative;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 0;
-            top: 0.5rem; /* Adjusted top for alignment with card start */
-            transform: translateX(-50%);
-            width: 1rem;
-            height: 1rem;
-            background-color: #4f46e5;
-            border-radius: 50%;
-            border: 3px solid #0a0a0a; /* Border matching body background */
-            z-index: 10;
-        }
-        .timeline-content {
-            margin-left: 2rem;
-            padding-bottom: 2rem; /* Spacing between items */
-        }
-        .hide-scroll-bar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scroll-bar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
-        /* Custom styling for card width and responsiveness */
-        .project-card {
-            min-width: 320px;
-            width: 350px;
-            flex: 0 0 auto;
-            transition: transform 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        /* Initial state for detail view (hidden) */
-        #project-detail-view {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease-in-out, visibility 0.4s;
-        }
-        /* Active state for detail view (visible) */
-        #project-detail-view.active {
-            opacity: 1;
-            visibility: visible;
-        }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'zinc-950': '#0a0a0a',
-                    }
-                }
-            }
-        }
-    </script>
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem !important;
+    color: var(--accent) !important;
+    border: 1px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--white) !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
 
+  /* ── SECTION WRAPPER ── */
+  section { padding: 100px 5vw; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 48px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .hero-name .last { color: var(--accent); }
+  .hero-terminal {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    min-height: 2em;
+  }
+  .hero-terminal .prompt { color: var(--accent-2); margin-right: 8px; }
+  .hero-terminal .typed { color: var(--text); }
+  .hero-terminal .cursor {
+    display: inline-block;
+    width: 2px; height: 1.1em;
+    background: var(--accent);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 13px 28px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 13px 28px;
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+  .hero-socials {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .hero-socials a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .hero-socials a:hover { color: var(--accent); }
+  .hero-socials::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--text-dim);
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg-2); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1em;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .skill-group {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: rgba(124,92,252,0.4); }
+  .skill-group-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 11px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .tag:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-glow); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg-2); }
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -38px;
+    top: 8px;
+    width: 13px; height: 13px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg-2);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .timeline-company {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent-2);
+    background: rgba(124,92,252,0.12);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .timeline-role {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .timeline-bullets li {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+    top: 2px;
+  }
+  .timeline-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .tech-pill {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent-2);
+    background: rgba(124,92,252,0.1);
+    border: 1px solid rgba(124,92,252,0.25);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover {
+    border-color: rgba(124,92,252,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg-2); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .edu-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .edu-degree {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .edu-institution {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .edu-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .edu-year {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .edu-grade {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .cert-section { margin-top: 56px; }
+  .cert-section .section-label { margin-bottom: 20px; }
+  .cert-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cert-item {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .cert-item:hover { border-color: var(--accent); color: var(--text); }
+  .cert-item::before {
+    content: '✦';
+    color: var(--accent);
+    font-size: 0.6rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); }
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner .section-label { justify-content: center; display: flex; }
+  .contact-inner .section-title { text-align: center; }
+  .contact-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 20px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 5vw;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .footer-accent {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .footer-accent span { color: var(--accent); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE NAV ── */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0;
+      padding: 16px 0;
+      transform: translateY(-110%);
+      transition: transform 0.3s;
+    }
+    .nav-links.open { transform: none; }
+    .nav-links a { padding: 12px 5vw; width: 100%; }
+    .nav-cta { border-radius: 0; border: none; border-top: 1px solid var(--border) !important; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-socials { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .cursor { animation: none; }
+  }
+</style>
 </head>
-<body class="bg-black text-gray-200 relative font-sans">
-    <!-- Subtle Background Texture -->
-    <div class="absolute inset-0 bg-texture z-0"></div>
+<body>
 
-    <!-- Header Section -->
-    <header class="bg-zinc-950 p-6 shadow-xl sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-indigo-400">Jose M</h1>
-            <nav>
-                <ul class="flex space-x-4 sm:space-x-6 text-sm sm:text-base">
-                    <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
-                    <li><a href="resume/python_full_stack_resume.pdf" class="hover:text-indigo-400 transition-colors">Resume</a></li>
-                    <li><a href="#education" class="hover:text-indigo-400 transition-colors">Education</a></li>
-                    <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
-                    <li><a href="#certifications" class="hover:text-indigo-400 transition-colors">Certificates</a></li>
-                    <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
-                </ul>
-            </nav>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Jose<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Let's talk</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">Available for opportunities</div>
+    <h1 class="hero-name reveal reveal-delay-1">Jose<br><span class="last">M.</span></h1>
+    <div class="hero-terminal reveal reveal-delay-2">
+      <span class="prompt">~/dev $</span>
+      <span class="typed" id="typed"></span><span class="cursor"></span>
+    </div>
+    <p class="hero-bio reveal reveal-delay-3">
+      I build intelligent systems and clean interfaces — from real-time sign language recognition
+      powered by ML to full-stack web platforms that scale. Based in Kerala, chasing hard problems.
+    </p>
+    <div class="hero-actions reveal reveal-delay-4">
+      <a href="#" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+      <a href="#projects" class="btn-secondary">See my work →</a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://www.linkedin.com/in/jose04" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/JoseM-Work" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:josemcontactmail@gmail.com">Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">// about me</div>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-1">
+        <p>
+          I'm a software developer completing my Master's in Computer Applications at Marian College Kuttikanam,
+          with a strong foundation in Python, Django, and machine learning. I enjoy the space where backend
+          logic meets real-world impact — whether that's an AI that reads sign language or a platform that connects
+          commuters on shared rides.
+        </p>
+        <p>
+          My internship at CodeWild Tech sharpened my frontend instincts — I shipped React interfaces from Figma
+          to pixel-perfect production. Outside code, I gravitate toward computer vision problems and designing
+          systems that actually make things easier for people.
+        </p>
+        <p>
+          Currently based in Idukki, Kerala — open to remote roles and on-site opportunities across India.
+        </p>
+      </div>
+      <div class="about-stats reveal reveal-delay-2">
+        <div class="stat-card">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Projects shipped</div>
         </div>
-    </header>
-
-    <main class="container mx-auto p-8 relative z-10">
-        <!-- Hero/About Me Section -->
-        <section id="about" class="py-16 flex flex-col md:flex-row items-center md:items-start gap-8" data-aos="fade-up" data-aos-duration="1000">
-
-            <!-- Profile Image and Name/Title -->
-            <div class="flex flex-col items-center">
-                <!-- Added cursor-pointer and an ID to the image for interactivity -->
-                <img
-                    id="profileImage"
-                    class="w-48 h-48 rounded-full object-cover mb-4 shadow-lg cursor-pointer transition-transform duration-300 transform hover:scale-105"
-                    src="profile_photos/profile.jpg"
-                    alt="Your profile picture"
-                >
-            </div>
-
-            <!-- About Me Content -->
-            <div class="text-center md:text-left">
-                <h2 class="text-5xl font-extrabold text-white mb-4 leading-tight">Hello! I'm <span class="hero-gradient">Jose</span>.</h2>
-                <p class="text-lg leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0 text-gray-400">
-                    I’m a Python Full Stack Developer passionate about building scalable, user-friendly web applications. I enjoy working across the stack—from crafting clean frontends to designing robust backends. Alongside web development, I’m exploring TensorFlow and OpenCV to dive into the world of machine learning and computer vision. Always curious, always learning, and always ready to solve problems with code.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-400 mb-8">
-                    <p><strong>Place:</strong> Idukki, Kerala</p>
-                    <p><strong>Date of Birth:</strong> 04/02/2003</p>
-                    <p><strong>Phone:</strong> +91 9061881899</p>
-                    <p><strong>Email:</strong> josemcontactmail@gmail.com</p>
-                </div>
-                <h3 class="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-python text-blue-300"></i><span>Python</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-dyalog text-emerald-400"></i><span>Django</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-java text-orange-400"></i><span>Java</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-html5 text-orange-500"></i><span>HTML5</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fab fa-css3-alt text-blue-500"></i><span>CSS3</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fas fa-camera text-sky-400"></i><span>OpenCV</span></span>
-                    <span class="bg-zinc-800 text-gray-200 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg"><i class="fas fa-brain text-rose-400"></i><span>TensorFlow</span></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Download Resume Button -->
-        <div class="flex justify-center mb-16">
-            <a href="resume/python_full_stack_resume.pdf" download>
-                <button
-                class="relative flex items-center px-6 py-3 overflow-hidden font-medium transition-all bg-indigo-500 rounded-md group"
-                >
-                <span
-                    class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4"
-                >
-                    <span
-                    class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
-                    ></span>
-                </span>
-                <span
-                    class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4"
-                >
-                    <span
-                    class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"
-                    ></span>
-                </span>
-                <span
-                    class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"
-                ></span>
-                <span
-                    class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white"
-                    >Download Resume</span
-                >
-                </button>
-            </a>
+        <div class="stat-card">
+          <div class="stat-num">70%+</div>
+          <div class="stat-label">ASL model accuracy</div>
         </div>
-
-        <!-- Education Section -->
-
-
-    <!-- Education Section with Timeline -->
-    <section id="education" class="py-16 px-10" data-aos="fade-up" data-aos-duration="1000">
-        <h2 class="text-4xl font-bold section-title mb-8 text-white">Education</h2>
-
-        <div class="timeline-container">
-            <!-- Education Entry 1 -->
-            <div class="timeline-item mb-12" data-aos="fade-right" data-aos-duration="1000">
-                <span class="timeline-dot"></span>
-                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl relative ml-6">
-                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Master of Computer Application</h3>
-                    <p class="text-gray-400 mb-2 font-medium">Marian College, Kuttikanam (Autonomous)</p>
-                    <p class="text-gray-400 mb-4 text-sm">2024 - Present</p>
-
-                        <li>CGPA: --</li>
-
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Education Entry 2 -->
-            <div class="timeline-item mb-12" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
-                <span class="timeline-dot"></span>
-                <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl relative ml-6">
-                    <h3 class="text-2xl font-semibold mb-2 text-indigo-300">Bachelor of Computer Applications</h3>
-                    <p class="text-gray-400 mb-2 font-medium">St. Antony's College, Peruvanthanam</p>
-                    <p class="text-gray-400 mb-4 text-sm">2021 - 2024</p>
-                    <li>CGPA : 6.66</li>
-                </div>
-            </div>
+        <div class="stat-card">
+          <div class="stat-num">7.98</div>
+          <div class="stat-label">MCA CGPA</div>
         </div>
-    </section>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">IBM & Udemy certifications</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <!-- Main Application Container -->
-    <div id="app-container" class="max-w-6xl mx-auto">
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">// technical skills</div>
+    <h2 class="section-title reveal reveal-delay-1">What I work with</h2>
+    <div class="skills-groups">
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-label">Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag">Django</span>
+          <span class="tag">Django REST Framework</span>
+          <span class="tag">React.js</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-3">
+        <div class="skill-group-label">ML & Computer Vision</div>
+        <div class="skill-tags">
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Keras</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">MediaPipe</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-4">
+        <div class="skill-group-label">Databases & Tools</div>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Figma</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">PyCharm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Project List View (Initial Content) -->
-        <section id="project-list-view" class="transition-all duration-500 ease-in-out">
-            <h2 class="text-4xl sm:text-5xl font-extrabold mb-8 text-center text-indigo-400">Featured Projects</h2>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">// experience</div>
+    <h2 class="section-title reveal reveal-delay-1">Where I've worked</h2>
+    <div class="timeline reveal reveal-delay-2">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">CodeWild Tech</span>
+          <span class="timeline-period">Dec 2025 – Feb 2026</span>
+        </div>
+        <div class="timeline-role">Frontend Developer Intern · Trivandrum</div>
+        <ul class="timeline-bullets">
+          <li>Created UI/UX designs and prototypes in Figma, then converted them into interactive, responsive web interfaces using React.js.</li>
+          <li>Built reusable React components and implemented multi-screen navigation using React Router for a scalable frontend architecture.</li>
+          <li>Crafted custom UI elements using SVG graphics, React Icons, and advanced CSS techniques including Flexbox and animations.</li>
+          <li>Implemented responsive layouts with media queries, optimising the interface across screen sizes and device resolutions.</li>
+          <li>Translated design mockups into pixel-perfect UIs while debugging layout, styling, and cross-device compatibility issues.</li>
+        </ul>
+        <div class="timeline-techs">
+          <span class="tech-pill">React.js</span>
+          <span class="tech-pill">HTML5</span>
+          <span class="tech-pill">CSS3</span>
+          <span class="tech-pill">Git & GitHub</span>
+          <span class="tech-pill">Figma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <!-- Projects Container (Horizontal Scroll) -->
-            <div id="projects-container" class="flex overflow-x-scroll pb-10 hide-scroll-bar">
-                <div class="flex flex-nowrap gap-8 p-2">
-                    <!-- Elegant Project Card 1: Focus on Python/Django -->
-                    <div class="bg-zinc-900 p-6 rounded-xl shadow-2xl card border-2 border-zinc-800 project-card"
-                         data-project-title="Pro - lens (E - Commerce )"
-                         data-full-description="A robust e-commerce application featuring product catalog management, secure payment integration via Stripe, real-time inventory tracking, and a custom, secure admin dashboard built entirely with the Django framework and deployed on AWS."
-                         data-tech-list="Python, Django, PostgreSQL"
-                         data-image-src="https://placehold.co/400x250/273043/FFFFFF?text=E-commerce+Platform">
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">// projects</div>
+    <h2 class="section-title reveal reveal-delay-1">Things I've built</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-num">01 — featured</div>
+        <div class="project-name">Silent Talk</div>
+        <p class="project-desc">
+          AI-powered web app that recognises American Sign Language gestures in real time using an LSTM model
+          trained on MediaPipe landmarks. Achieves 70%+ accuracy at a smooth 30 FPS — making communication
+          more accessible for the hearing-impaired.
+        </p>
+        <div class="project-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">TensorFlow / Keras</span>
+          <span class="tech-pill">OpenCV</span>
+          <span class="tech-pill">MediaPipe</span>
+          <span class="tech-pill">Streamlit</span>
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">PostgreSQL</span>
+        </div>
+      </div>
 
-                        <img src="https://placehold.co/400x250/273043/FFFFFF?text=E-commerce+Platform" alt="Project 1 Image" class="w-full h-auto rounded-lg mb-4 object-cover aspect-video">
-                        
-                        <h3 class="text-2xl font-bold mb-3 text-indigo-300">Pro-lens(E - Commerce)</h3>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">02</div>
+        <div class="project-name">Trackin</div>
+        <p class="project-desc">
+          Web-based attendance management system for administrators, staff, and students. Automates attendance
+          tracking, report generation, and user management through a secure, role-based interface.
+        </p>
+        <div class="project-stack">
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">React.js</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Bootstrap</span>
+          <span class="tech-pill">JavaScript</span>
+        </div>
+      </div>
 
-                        <a href="https://github.com/JoseM-Work/Pro-lens-#" target="_blank">
-                            <svg class="w-6 h-6 text-gray-300 hover:text-white transition" viewbox="0 0 24 24" fill="currentColor">
-                                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.92.58.11.79-.25.79-.56v-2.02c-3.2.7-3.87-1.39-3.87-1.39-.53-1.34-1.31-1.7-1.31-1.7-1.07-.73.08-.72.08-.72 1.18.08 1.8 1.21 1.8 1.21 1.05 1.8 2.75 1.28 3.42.98.11-.77.41-1.28.75-1.57-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.45.11-3.02 0 0 .97-.31 3.18 1.18a10.9 10.9 0 0 1 5.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.57.23 2.73.11 3.02.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.67.42.36.8 1.09.8 2.21v3.28c0 .31.21.67.8.56A10.99 10.99 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/>
-                            </svg>
-                        </a>
-                        <br>
-    
-                    
-                        
-                        </a>
-                        <div class="mb-4 flex flex-wrap gap-2 project-tech-tags">
-                            <span class="text-xs font-medium bg-green-900/50 text-green-300 px-3 py-1 rounded-full">Python</span>
-                            <span class="text-xs font-medium bg-green-900/50 text-green-300 px-3 py-1 rounded-full">Django</span>
-                            <span class="text-xs font-medium bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full">PostgreSQL</span>
-                        </div>
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-num">03</div>
+        <div class="project-name">PoolMate</div>
+        <p class="project-desc">
+          Django carpooling platform that connects ride providers and passengers. Features include trip publishing,
+          ride search, booking requests, notifications, user reviews, and full profile management.
+        </p>
+        <div class="project-stack">
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">SQLite</span>
+          <span class="tech-pill">Bootstrap</span>
+          <span class="tech-pill">HTML / CSS</span>
+        </div>
+      </div>
 
-                        <!-- Description container with truncated text -->
-                        <div class="text-gray-400 text-sm mb-6 project-description">
-                            <!-- Content will be populated by JavaScript -->
-                        </div>
+      <div class="project-card reveal reveal-delay-4">
+        <div class="project-num">04</div>
+        <div class="project-name">Pro-Lens</div>
+        <p class="project-desc">
+          Full-featured Django e-commerce platform for eyewear purchases. Includes product search, cart
+          management, order processing, payments, user profiles, and a comprehensive admin panel for product
+          and category management.
+        </p>
+        <div class="project-stack">
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Streamlit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        <div class="flex justify-end pt-3 border-t border-zinc-800">
-                            <button class="view-details-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-lg">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Elegant Project Card 2: Focus on AI/ML -->
-                    <div class="bg-zinc-900 p-6 rounded-xl shadow-2xl card border-2 border-zinc-800 project-card"
-                         data-project-title="Image Recognition Model"
-                         data-full-description="A deep learning model for real-time object classification trained on the COCO dataset. It integrates computer vision techniques (OpenCV) for preprocessing, feature extraction, and bounding box visualization to achieve 90%+ accuracy."
-                         data-tech-list="TensorFlow, OpenCV, Python"
-                         data-image-src="https://placehold.co/400x250/273043/FFFFFF?text=Image+Classifier+App">
-
-                        <img src="https://placehold.co/400x250/273043/FFFFFF?text=Image+Classifier+App" alt="Project 2 Image" class="w-full h-auto rounded-lg mb-4 object-cover aspect-video">
-                        <h3 class="text-2xl font-bold mb-3 text-indigo-300">Image Recognition Model</h3>
-
-                        <div class="mb-4 flex flex-wrap gap-2 project-tech-tags">
-                            <span class="text-xs font-medium bg-red-900/50 text-red-300 px-3 py-1 rounded-full">TensorFlow</span>
-                            <span class="text-xs font-medium bg-red-900/50 text-red-300 px-3 py-1 rounded-full">OpenCV</span>
-                            <span class="text-xs font-medium bg-green-900/50 text-green-300 px-3 py-1 rounded-full">Python</span>
-                        </div>
-
-                        <!-- Description container with truncated text -->
-                        <div class="text-gray-400 text-sm mb-6 project-description">
-                            <!-- Content will be populated by JavaScript -->
-                        </div>
-
-                        <div class="flex justify-end pt-3 border-t border-zinc-800">
-                            <button class="view-details-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-lg">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Elegant Project Card 3: Focus on Frontend/React -->
-                    <div class="bg-zinc-900 p-6 rounded-xl shadow-2xl card border-2 border-zinc-800 project-card"
-                         data-project-title="Data Visualization Dashboard"
-                         data-full-description="A dynamic, responsive dashboard designed to visualize complex time-series datasets. Developed with React for modularity and D3.js for custom, interactive charts, it also features multi-language support and user authentication."
-                         data-tech-list="React, D3.js, Tailwind CSS"
-                         data-image-src="https://placehold.co/400x250/273043/FFFFFF?text=Modern+Dashboard">
-
-                        <img src="https://placehold.co/400x250/273043/FFFFFF?text=Modern+Dashboard" alt="Project 3 Image" class="w-full h-auto rounded-lg mb-4 object-cover aspect-video">
-                        <h3 class="text-2xl font-bold mb-3 text-indigo-300">Data Visualization Dashboard</h3>
-
-                        <div class="mb-4 flex flex-wrap gap-2 project-tech-tags">
-                            <span class="text-xs font-medium bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full">React</span>
-                            <span class="text-xs font-medium bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full">D3.js</span>
-                            <span class="text-xs font-medium bg-orange-900/50 text-orange-300 px-3 py-1 rounded-full">Tailwind CSS</span>
-                        </div>
-
-                        <!-- Description container with truncated text -->
-                        <div class="text-gray-400 text-sm mb-6 project-description">
-                            <!-- Content will be populated by JavaScript -->
-                        </div>
-
-                        <div class="flex justify-end pt-3 border-t border-zinc-800">
-                            <button class="view-details-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-lg">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Elegant Project Card 4: Focus on Java/Backend -->
-                    <div class="bg-zinc-900 p-6 rounded-xl shadow-2xl card border-2 border-zinc-800 project-card"
-                         data-project-title="Microservice API Gateway"
-                         data-full-description="A high-performance RESTful API gateway implemented with Spring Boot and deployed in a Dockerized environment. It handles rate limiting, request validation, and acts as the central point for routing traffic to multiple backend microservices."
-                         data-tech-list="Java, Spring Boot, Docker"
-                         data-image-src="https://placehold.co/400x250/273043/FFFFFF?text=Microservice+API">
-
-                        <img src="https://placehold.co/400x250/273043/FFFFFF?text=Microservice+API" alt="Project 4 Image" class="w-full h-auto rounded-lg mb-4 object-cover aspect-video">
-                        <h3 class="text-2xl font-bold mb-3 text-indigo-300">Microservice API Gateway</h3>
-
-                        <div class="mb-4 flex flex-wrap gap-2 project-tech-tags">
-                            <span class="text-xs font-medium bg-orange-900/50 text-orange-300 px-3 py-1 rounded-full">Java</span>
-                            <span class="text-xs font-medium bg-orange-900/50 text-orange-300 px-3 py-1 rounded-full">Spring Boot</span>
-                            <span class="text-xs font-medium bg-gray-900/50 text-gray-300 px-3 py-1 rounded-full">Docker</span>
-                        </div>
-
-                        <!-- Description container with truncated text -->
-                        <div class="text-gray-400 text-sm mb-6 project-description">
-                            <!-- Content will be populated by JavaScript -->
-                        </div>
-
-                        <div class="flex justify-end pt-3 border-t border-zinc-800">
-                            <button class="view-details-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-lg">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 5 -->
-                    <div class="bg-zinc-900 p-6 rounded-xl shadow-2xl card border-2 border-zinc-800 project-card"
-                         data-project-title="Collaborative Task Manager"
-                         data-full-description="A real-time, single-page application for team-based task management. It features a responsive drag-and-drop Kanban board interface, instant data synchronization via Firestore, and user role management for permissions."
-                         data-tech-list="Vue.js, Firebase, HTML5"
-                         data-image-src="https://placehold.co/400x250/273043/FFFFFF?text=Task+Manager">
-
-                        <img src="https://placehold.co/400x250/273043/FFFFFF?text=Task+Manager" alt="Project 5 Image" class="w-full h-auto rounded-lg mb-4 object-cover aspect-video">
-                        <h3 class="text-2xl font-bold mb-3 text-indigo-300">Collaborative Task Manager</h3>
-
-                        <div class="mb-4 flex flex-wrap gap-2 project-tech-tags">
-                            <span class="text-xs font-medium bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full">Vue.js</span>
-                            <span class="text-xs font-medium bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full">Firebase</span>
-                            <span class="text-xs font-medium bg-indigo-900/50 text-indigo-300 px-3 py-1 rounded-full">HTML5</span>
-                        </div>
-
-                        <!-- Description container with truncated text -->
-                        <div class="text-gray-400 text-sm mb-6 project-description">
-                            <!-- Content will be populated by JavaScript -->
-                        </div>
-
-                        <div class="flex justify-end pt-3 border-t border-zinc-800">
-                            <button class="view-details-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-lg">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Project Detail View (The "new page" that slides in) -->
-        <section id="project-detail-view" class="fixed inset-0 bg-zinc-950 z-50 overflow-y-auto p-4 sm:p-10 transition-opacity duration-500 ease-in-out">
-            <div class="max-w-4xl mx-auto">
-                <button id="back-to-list-btn" class="mb-8 text-indigo-400 hover:text-indigo-300 transition-colors flex items-center space-x-2 text-lg font-medium">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back to Projects</span>
-                </button>
-
-                <div class="bg-zinc-900 p-6 sm:p-10 rounded-xl shadow-2xl border-2 border-zinc-800">
-                    <!-- Project Title -->
-                    <h1 id="detail-title" class="text-3xl sm:text-4xl font-extrabold mb-4 text-indigo-300"></h1>
-
-                    <!-- Technologies Used -->
-                    <h2 class="text-xl font-bold mb-3 text-gray-300 border-b border-zinc-800 pb-2">Technologies Used</h2>
-                    <div id="detail-tech-list" class="mb-8 flex flex-wrap gap-3">
-                        <!-- Tech tags will be populated here by JS -->
-                    </div>
-
-                    <!-- About the Project (Full Description) -->
-                    <h2 class="text-xl font-bold mb-3 text-gray-300 border-b border-zinc-800 pb-2">About the Project</h2>
-                    <p id="detail-description" class="text-gray-400 text-base leading-relaxed mb-12"></p>
-
-                    <!-- Screenshots / Mockups -->
-                    <h2 class="text-xl font-bold mb-4 text-gray-300 border-b border-zinc-800 pb-2">Screenshots & Mockups</h2>
-                    <div id="detail-screenshots" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- The main image is dynamic -->
-                        <img id="detail-main-screenshot" src="" alt="Main Project Screenshot" class="w-full h-auto rounded-lg object-cover shadow-xl border border-zinc-700 aspect-video">
-
-                        <!-- Placeholder for additional mockups -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <img src="https://placehold.co/200x150/1C212E/747D93?text=Mobile+View" alt="Mobile View Mockup" class="w-full h-auto rounded-lg object-cover border border-zinc-700 aspect-square">
-                            <img src="https://placehold.co/200x150/1C212E/747D93?text=Admin+Panel" alt="Admin Panel Mockup" class="w-full h-auto rounded-lg object-cover border border-zinc-700 aspect-square">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">// education</div>
+    <h2 class="section-title reveal reveal-delay-1">Academic background</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-degree">Master of Computer Applications</div>
+        <div class="edu-institution">Marian College Kuttikanam (Autonomous)</div>
+        <div class="edu-meta">
+          <span class="edu-year">2024 – 2026</span>
+          <span class="edu-grade">CGPA: 7.98</span>
+        </div>
+      </div>
+      <div class="edu-card reveal reveal-delay-2">
+        <div class="edu-degree">Bachelor of Computer Applications</div>
+        <div class="edu-institution">St. Antony's College, Peruvanthanam</div>
+        <div class="edu-meta">
+          <span class="edu-year">2021 – 2024</span>
+          <span class="edu-grade">CCPA: 6.64</span>
+        </div>
+      </div>
     </div>
 
-
-        <!-- Certifications Section (Carousel) -->
-        <section id="certifications" class="py-16 relative px-10" data-aos="fade-up" data-aos-duration="1000">
-            <h2 class="text-4xl font-bold section-title mb-8 text-white">Certificates</h2>
-            <!-- Navigation Buttons -->
-            <div class="absolute left-0 right-0 top-1/2 flex justify-between transform -translate-y-1/2">
-                <button id="certs-left-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button id="certs-right-btn" class="bg-zinc-800 text-white p-3 rounded-full hover:bg-zinc-700 transition-colors z-10 shadow-lg">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <!-- Certificates Container -->
-            <div id="certs-container" class="flex overflow-x-scroll pb-10 hide-scroll-bar">
-                <div class="flex flex-nowrap gap-8">
-                    <!-- IMPORTANT: Replace these with your actual certificates -->
-                    <!-- Certificate Card 1 -->
-                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000">
-                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+1" alt="Certificate 1 Image" class="w-full h-auto rounded-lg mb-4">
-                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">JavaScript Algorithms and Data Structures</h3>
-                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
-                        <p class="text-gray-400 text-sm mb-4">Acquired Date: March 2023</p>
-                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
-                    </div>
-                    <!-- Certificate Card 2 -->
-                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
-                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+2" alt="Certificate 2 Image" class="w-full h-auto rounded-lg mb-4">
-                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Responsive Web Design</h3>
-                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
-                        <p class="text-gray-400 text-sm mb-4">Acquired Date: January 2023</p>
-                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
-                    </div>
-                    <!-- Certificate Card 3 -->
-                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+3" alt="Certificate 3 Image" class="w-full h-auto rounded-lg mb-4">
-                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Front-End Development Libraries</h3>
-                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
-                        <p class="text-gray-400 text-sm mb-4">Acquired Date: May 2023</p>
-                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
-                    </div>
-                    <!-- Certificate Card 4 -->
-                    <div class="bg-zinc-900 p-6 rounded-lg shadow-2xl card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
-                        <img src="https://placehold.co/400x250/374151/FFFFFF?text=Certificate+4" alt="Certificate 4 Image" class="w-full h-auto rounded-lg mb-4">
-                        <h3 class="text-xl font-semibold mb-1 text-indigo-300">Data Visualization</h3>
-                        <p class="text-gray-400 text-sm mb-1">Acquired from: FreeCodeCamp</p>
-                        <p class="text-gray-400 text-sm mb-4">Acquired Date: July 2023</p>
-                        <a href="#" class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-sm">View Certificate &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-16" data-aos="fade-up" data-aos-duration="1000">
-            <h2 class="text-4xl font-bold section-title mb-8 text-white">Contact Me</h2>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <!-- Phone -->
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-phone text-indigo-400 text-2xl"></i>
-                    <p class="text-lg font-medium text-gray-200">+1 (555) 123-4567</p>
-                </div>
-                <!-- Email -->
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-envelope text-indigo-400 text-2xl"></i>
-                    <p class="text-lg font-medium text-gray-200">your.email@example.com</p>
-                </div>
-            </div>
-            <div class="mt-8 flex justify-center space-x-6">
-                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
-                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-3xl text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer Section -->
-    <footer class="bg-zinc-950 p-6 text-center text-gray-500">
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
-
-    <!-- Image Modal (hidden by default) -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 cursor-pointer">
-        <!-- Close button at the top right -->
-        <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-400 transition-colors">
-            &times;
-        </button>
-        <!-- The image inside the modal -->
-        <img id="modalImage" class="max-w-full max-h-full rounded-lg shadow-2xl" src="" alt="Enlarged profile picture">
+    <div class="cert-section reveal">
+      <div class="section-label">// certifications</div>
+      <div class="cert-list">
+        <div class="cert-item">100 Days of Code: The Complete Python Pro Bootcamp — Udemy</div>
+        <div class="cert-item">Machine Learning with Python (ML0101EN) — IBM</div>
+        <div class="cert-item">Data Analysis with Python (DA010EN) — IBM</div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- AOS JavaScript file -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="section-label reveal">// contact</div>
+      <h2 class="section-title reveal reveal-delay-1">Let's build something together</h2>
+      <p class="contact-desc reveal reveal-delay-2">
+        I'm actively looking for opportunities in software development, ML engineering, and full-stack roles.
+        Whether you have a project in mind or just want to connect — my inbox is open.
+      </p>
+      <div class="contact-links reveal reveal-delay-3">
+        <a href="mailto:josemcontactmail@gmail.com" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          josemcontactmail@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/jose04" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/jose04
+        </a>
+        <a href="https://github.com/JoseM-Work" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/JoseM-Work
+        </a>
+        <a href="tel:9061881899" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.12-1.12a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 90618 81899
+        </a>
+      </div>
+      <a href="#" class="btn-primary reveal reveal-delay-4" style="margin: 0 auto; width: fit-content;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- All page-specific JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize AOS
-            AOS.init();
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Jose M. Built with care.</span>
+  <span class="footer-accent">Made with <span>♥</span> in Kerala</span>
+</footer>
 
-            // Image Modal Logic
-            const profileImage = document.getElementById('profileImage');
-            const imageModal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const closeModal = document.getElementById('closeModal');
+<script>
+  // ── Hamburger ──
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
 
-            if (profileImage) {
-                profileImage.addEventListener('click', () => {
-                    const imageUrl = profileImage.getAttribute('src');
-                    modalImage.src = imageUrl;
-                    imageModal.classList.remove('hidden');
-                    imageModal.classList.add('flex');
-                });
-            }
+  // ── Typewriter ──
+  const roles = [
+    'python developer',
+    'django engineer',
+    'ml engineer',
+    'react developer',
+    'full-stack builder',
+  ];
+  const typedEl = document.getElementById('typed');
+  let ri = 0, ci = 0, deleting = false;
+  function type() {
+    const word = roles[ri];
+    if (!deleting) {
+      typedEl.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; return setTimeout(type, 1600); }
+    } else {
+      typedEl.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(type, deleting ? 55 : 85);
+  }
+  setTimeout(type, 800);
 
-            if (imageModal) {
-                imageModal.addEventListener('click', (e) => {
-                    if (e.target === imageModal || e.target === closeModal) {
-                        imageModal.classList.add('hidden');
-                        imageModal.classList.remove('flex');
-                    }
-                });
-            }
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Carousel/Scroll Functionality
-            const projectsContainer = document.getElementById('projects-container');
-            const projectsLeftBtn = document.getElementById('projects-left-btn');
-            const projectsRightBtn = document.getElementById('projects-right-btn');
-            const certsContainer = document.getElementById('certs-container');
-            const certsLeftBtn = document.getElementById('certs-left-btn');
-            const certsRightBtn = document.getElementById('certs-right-btn');
-
-            if (projectsLeftBtn && projectsContainer) {
-                projectsLeftBtn.addEventListener('click', () => {
-                    projectsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-                });
-            }
-
-            if (projectsRightBtn && projectsContainer) {
-                projectsRightBtn.addEventListener('click', () => {
-                    projectsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-                });
-            }
-
-            if (certsLeftBtn && certsContainer) {
-                certsLeftBtn.addEventListener('click', () => {
-                    certsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-                });
-            }
-
-            if (certsRightBtn && certsContainer) {
-                certsRightBtn.addEventListener('click', () => {
-                    certsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-                });
-            }
-        });
-
-        <!-- javascript for read more option in projects section-->
-         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize AOS
-            AOS.init();
-
-            // --- Read More / Read Less Logic for Projects ---
-            const TRUNCATE_LIMIT = 150; // Character limit for initial display
-
-            function setupReadMore() {
-                document.querySelectorAll('.project-card').forEach((card) => {
-                    const descContainer = card.querySelector('.project-description');
-                    const fullText = descContainer.getAttribute('data-full-description').trim();
-
-                    if (fullText.length > TRUNCATE_LIMIT) {
-                        // Truncate the text and add ellipsis
-                        const truncatedText = fullText.substring(0, TRUNCATE_LIMIT) + '...';
-
-                        // Populate the container with truncated text, hidden full text, and a toggle button
-                        descContainer.innerHTML = `
-                            <span class="truncated-text">${truncatedText}</span>
-                            <span class="full-text hidden">${fullText.substring(TRUNCATE_LIMIT)}</span>
-                            <button class="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-xs ml-1 focus:outline-none read-more-toggle">
-                                Read More
-                            </button>
-                        `;
-
-                        const toggleButton = descContainer.querySelector('.read-more-toggle');
-                        const truncatedSpan = descContainer.querySelector('.truncated-text');
-                        const fullSpan = descContainer.querySelector('.full-text');
-
-                        toggleButton.addEventListener('click', () => {
-                            const isReadingMore = toggleButton.textContent === 'Read More';
-
-                            if (isReadingMore) {
-                                // Switch to Read Less mode
-                                truncatedSpan.classList.add('hidden');
-                                fullSpan.classList.remove('hidden');
-                                toggleButton.textContent = 'Read Less';
-                            } else {
-                                // Switch back to Read More mode
-                                truncatedSpan.classList.remove('hidden');
-                                fullSpan.classList.add('hidden');
-                                toggleButton.textContent = 'Read More';
-                            }
-                        });
-
-                    } else {
-                        // If text is short, just display the full text
-                        descContainer.textContent = fullText;
-                    }
-                });
-            }
-
-            setupReadMore();
-            // --- End Read More / Read Less Logic ---
-
-
-            // Image Modal Logic
-            const profileImage = document.getElementById('profileImage');
-            const imageModal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const closeModal = document.getElementById('closeModal');
-
-            if (profileImage) {
-                profileImage.addEventListener('click', () => {
-                    const imageUrl = profileImage.getAttribute('src');
-                    modalImage.src = imageUrl;
-                    imageModal.classList.remove('hidden');
-                    imageModal.classList.add('flex');
-                });
-            }
-
-            if (imageModal) {
-                imageModal.addEventListener('click', (e) => {
-                    if (e.target === imageModal || e.target === closeModal) {
-                        imageModal.classList.add('hidden');
-                        imageModal.classList.remove('flex');
-                    }
-                });
-            }
-
-            // Carousel/Scroll Functionality
-            const projectsContainer = document.getElementById('projects-container');
-            const projectsLeftBtn = document.getElementById('projects-left-btn');
-            const projectsRightBtn = document.getElementById('projects-right-btn');
-            const certsContainer = document.getElementById('certs-container');
-            const certsLeftBtn = document.getElementById('certs-left-btn');
-            const certsRightBtn = document.getElementById('certs-right-btn');
-
-            if (projectsLeftBtn && projectsContainer) {
-                projectsLeftBtn.addEventListener('click', () => {
-                    projectsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-                });
-            }
-
-            if (projectsRightBtn && projectsContainer) {
-                projectsRightBtn.addEventListener('click', () => {
-                    projectsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-                });
-            }
-
-            if (certsLeftBtn && certsContainer) {
-                certsLeftBtn.addEventListener('click', () => {
-                    certsContainer.scrollBy({ left: -350, behavior: 'smooth' });
-                });
-            }
-
-            if (certsRightBtn && certsContainer) {
-                certsRightBtn.addEventListener('click', () => {
-                    certsContainer.scrollBy({ left: 350, behavior: 'smooth' });
-                });
-            }
-        });
-         document.addEventListener('DOMContentLoaded', () => {
-            const listContainer = document.getElementById('project-list-view');
-            const detailContainer = document.getElementById('project-detail-view');
-            const backButton = document.getElementById('back-to-list-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-
-            // --- Utility Functions ---
-
-            /**
-             * Truncates a string to a specified word limit and appends an ellipsis.
-             * @param {string} text The full description text.
-             * @param {number} limit The maximum number of words.
-             * @returns {string} The truncated string.
-             */
-            const truncateText = (text, limit) => {
-                const words = text.split(' ');
-                if (words.length > limit) {
-                    return words.slice(0, limit).join(' ') + '...';
-                }
-                return text;
-            };
-
-            /**
-             * Populates the truncated description on each project card.
-             */
-            const initializeCardDescriptions = () => {
-                projectCards.forEach(card => {
-                    const fullDesc = card.getAttribute('data-full-description');
-                    const descElement = card.querySelector('.project-description');
-                    if (descElement && fullDesc) {
-                        descElement.textContent = truncateText(fullDesc, 20); // Show first 20 words
-                    }
-                });
-            };
-
-            /**
-             * Populates the detail view with the selected project's data.
-             * @param {HTMLElement} card The clicked project card element.
-             */
-            const populateDetailView = (card) => {
-                const title = card.getAttribute('data-project-title');
-                const fullDesc = card.getAttribute('data-full-description');
-                const techList = card.getAttribute('data-tech-list');
-                const imageSrc = card.getAttribute('data-image-src');
-                const techTagsContainer = card.querySelector('.project-tech-tags');
-
-                // 1. Set Title and Description
-                document.getElementById('detail-title').textContent = title;
-                document.getElementById('detail-description').textContent = fullDesc;
-                document.getElementById('detail-main-screenshot').src = imageSrc;
-
-                // 2. Set Technologies Used
-                const detailTechList = document.getElementById('detail-tech-list');
-                detailTechList.innerHTML = ''; // Clear existing tags
-
-                // Create new tags for the detail view using the same styles as the card
-                const tags = techList.split(',').map(tag => tag.trim());
-
-                // Fetch the colors from the card's existing tags for consistency
-                const cardTags = techTagsContainer.querySelectorAll('span');
-
-                tags.forEach((tag, index) => {
-                    const techSpan = document.createElement('span');
-                    let classNames = 'text-sm font-medium px-4 py-2 rounded-full shadow-md'; // Slightly larger for detail view
-
-                    // Try to reuse class names from the existing card for color consistency
-                    if (cardTags[index]) {
-                        // Copy classes, filtering out non-color/size/font classes
-                        const classesToCopy = Array.from(cardTags[index].classList).filter(c => c.includes('bg-') || c.includes('text-'));
-                        classNames += ' ' + classesToCopy.join(' ');
-                    } else {
-                        // Fallback/default style if structure changed
-                        classNames += ' bg-indigo-900/50 text-indigo-300';
-                    }
-
-                    techSpan.className = classNames;
-                    techSpan.textContent = tag;
-                    detailTechList.appendChild(techSpan);
-                });
-            };
-
-            // --- Event Handlers ---
-
-            /**
-             * Handles the click on the "View Details" button.
-             * @param {Event} e The click event.
-             */
-            const handleViewDetails = (e) => {
-                const button = e.target.closest('.view-details-btn');
-                if (!button) return;
-
-                const card = button.closest('.project-card');
-                if (!card) return;
-
-                populateDetailView(card);
-
-                // Hide list view
-                listContainer.style.display = 'none';
-
-                // Show detail view with transition
-                detailContainer.style.display = 'block';
-                // Wait for display change to apply before adding 'active' class for transition
-                requestAnimationFrame(() => {
-                    detailContainer.classList.add('active');
-                });
-
-                window.scrollTo(0, 0); // Scroll to top of the new view
-            };
-
-            /**
-             * Handles the click on the "Back to Projects" button.
-             */
-            const handleBackToList = () => {
-                // Hide detail view with transition
-                detailContainer.classList.remove('active');
-
-                // Use a slight delay to ensure transition completes before hiding/showing blocks
-                setTimeout(() => {
-                    detailContainer.style.display = 'none';
-                    listContainer.style.display = 'block';
-                    window.scrollTo(0, 0); // Scroll to top of the list
-                }, 400);
-            };
-
-            // --- Initialization ---
-
-            // 1. Setup truncated descriptions
-            initializeCardDescriptions();
-
-            // 2. Attach click listeners
-            document.querySelectorAll('.view-details-btn').forEach(button => {
-                button.addEventListener('click', handleViewDetails);
-            });
-            backButton.addEventListener('click', handleBackToList);
-
-            // Initially hide the detail view
-            detailContainer.style.display = 'none';
-        });
-    </script>
-
+  // ── Nav shadow on scroll ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.boxShadow =
+      window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,0.4)' : 'none';
+  });
+</script>
 </body>
 </html>
